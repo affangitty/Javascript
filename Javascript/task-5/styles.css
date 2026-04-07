@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+}
+
+/* Container */
+
+.container {
+    background: white;
+    width: 420px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#question {
+    font-size: 18px;
+    color: #1e293b;
+}
+
+/* Options */
+
+#options {
+    margin-top: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    color: #1e293b;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.option:hover {
+    background: #e2e8f0;
+}
+
+.option:active {
+    transform: scale(0.98);
+}
+
+/* States */
+
+.selected {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+.correct {
+    background: #16a34a;
+    color: white;
+}
+
+.wrong {
+    background: #dc2626;
+    color: white;
+}
+
+/* Buttons */
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #2c3e50;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Disabled */
+
+button:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* Result */
+
+#resultBox {
+    text-align: center;
+}
+
+#score {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Utility */
+
+.hidden {
+    display: none;
+}
