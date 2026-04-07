@@ -17,8 +17,8 @@ buttons.forEach(button => {
             try {
                 expression = eval(expression).toString();
                 display.value = expression;
-            } catch {
-                display.value = "Error";
+            } catch(err) {
+                display.value = err;
                 expression = "";
             }
             return;

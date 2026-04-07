@@ -48,7 +48,10 @@ function renderTasks() {
 
 addBtn.addEventListener("click", () => {
     const text = taskInput.value.trim();
-    if (!text) return;
+    if (!text){
+        alert("box is empty!");
+        return;
+    } 
 
     tasks.push({
         id: Date.now(),
