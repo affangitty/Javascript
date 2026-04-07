@@ -1,0 +1,37 @@
+body {
+    font-family: Arial;
+    margin: 20px;
+}
+
+.layout {
+    display: flex;
+    gap: 20px;
+}
+
+#products {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.product img {
+    width: 100%;
+}
+
+.cart-section {
+    flex: 1;
+    border-left: 2px solid #ddd;
+    padding-left: 15px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
