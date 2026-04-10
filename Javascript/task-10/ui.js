@@ -1,72 +1,93 @@
-import { addToCart, getCart, removeFromCart, updateQty, getTotal } from "./cart.js";
+import { addToCart, getCart, updateQty, removeItem, getTotals } from "./cart.js";
 
-const productList = document.getElementById("products");
-const cartList = document.getElementById("cart");
-const totalEl = document.getElementById("total");
+const productsEl = document.getElementById("products");
+const cartEl = document.getElementById("cart");
+const totalsEl = document.getElementById("totals");
 
-/* Render products */
+/* PRODUCTS */
 
 export function renderProducts(products) {
-    productList.innerHTML = "";
+  productsEl.innerHTML = "";
 
-    products.forEach(p => {
-        const div = document.createElement("div");
-        div.classList.add("product");
+  products.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "product";
 
-        div.innerHTML = `
-            <img src="${p.image}">
-            <h3>${p.name}</h3>
-            <p>₹${p.price}</p>
-            <button>Add to Cart</button>
-        `;
+    card.innerHTML = `
+      <img src="${p.image}">
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <span>₹${p.price}</span>
+      <button>Add to Cart</button>
+    `;
 
-        div.querySelector("button").onclick = () => {
-            addToCart(p);
-            renderCart();
-        };
+    card.querySelector("button").onclick = () => {
+      addToCart(p);
+      renderCart();
+    };
 
-        productList.appendChild(div);
-    });
+    productsEl.appendChild(card);
+  });
 }
 
-/* Render cart */
+/* CART */
 
 export function renderCart() {
-    const cart = getCart();
-    cartList.innerHTML = "";
+  const cart = getCart();
+  cartEl.innerHTML = "";
 
-    cart.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
+  cart.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "cart-item";
 
-        div.innerHTML = `
-            <span>${item.name}</span>
-            <div>
-                <button class="dec">-</button>
-                ${item.qty}
-                <button class="inc">+</button>
-            </div>
-            <span>₹${item.price * item.qty}</span>
-            <button class="remove">X</button>
-        `;
+    div.innerHTML = `
+      <div>
+        <strong>${item.name}</strong>
+        <p>₹${item.price}</p>
+      </div>
 
-        div.querySelector(".inc").onclick = () => {
-            updateQty(item.id, 1);
-            renderCart();
-        };
+      <div class="qty">
+        <button class="dec">-</button>
+        ${item.qty}
+        <button class="inc">+</button>
+      </div>
 
-        div.querySelector(".dec").onclick = () => {
-            updateQty(item.id, -1);
-            renderCart();
-        };
+      <div>
+        ₹${item.price * item.qty}
+        <button class="remove">X</button>
+      </div>
+    `;
 
-        div.querySelector(".remove").onclick = () => {
-            removeFromCart(item.id);
-            renderCart();
-        };
+    div.querySelector(".inc").onclick = () => {
+      updateQty(item.id, 1);
+      renderCart();
+    };
 
-        cartList.appendChild(div);
-    });
+    div.querySelector(".dec").onclick = () => {
+      updateQty(item.id, -1);
+      renderCart();
+    };
 
-    totalEl.textContent = `Total: ₹${getTotal()}`;
+    div.querySelector(".remove").onclick = () => {
+      removeItem(item.id);
+      renderCart();
+    };
+
+    cartEl.appendChild(div);
+  });
+
+  renderTotals();
+}
+
+/* TOTALS */
+
+function renderTotals() {
+  const { subtotal, tax, discount, total } = getTotals();
+
+  totalsEl.innerHTML = `
+    <p>Subtotal: ₹${subtotal}</p>
+    <p>Tax (10%): ₹${tax}</p>
+    <p>Discount: ₹${discount}</p>
+    <h3>Total: ₹${total}</h3>
+  `;
 }

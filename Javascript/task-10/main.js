@@ -1,21 +1,30 @@
 import { products } from "./data.js";
 import { renderProducts, renderCart } from "./ui.js";
 
-/* Init */
+const search = document.getElementById("search");
+const filter = document.getElementById("filter");
+
+function updateView() {
+  let filtered = [...products];
+
+  const query = search.value.toLowerCase();
+  const category = filter.value;
+
+  if (query) {
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(query)
+    );
+  }
+
+  if (category !== "all") {
+    filtered = filtered.filter(p => p.category === category);
+  }
+
+  renderProducts(filtered);
+}
+
+search.addEventListener("input", updateView);
+filter.addEventListener("change", updateView);
 
 renderProducts(products);
 renderCart();
-
-/* Search */
-
-const searchInput = document.getElementById("search");
-
-searchInput.addEventListener("input", (e) => {
-    const value = e.target.value.toLowerCase();
-
-    const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(value)
-    );
-
-    renderProducts(filtered);
-});
